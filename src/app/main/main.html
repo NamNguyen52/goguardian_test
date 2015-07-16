@@ -1,17 +1,82 @@
 <div class="container">
 
- <!--  <div>
-    <acme-navbar />
-  </div> -->
-
+<!-- Team Rankings section -->
   <div class="jumbotron text-center">
     <h1>The League</h1>
-    <h2>Rannkings</h2>
+    <h2>Rankings</h2>
   </div>
-
   <h3>Current Rankings</h3>
   <ul class="list-group">
-    <li class="list-group-item" ng-repeat="team in main.teams">{{ team }}</li>
+    <li class="list-group-item" ng-repeat="team in main.teams"><a ng-click="main.getTeamInfo(team.id)" href="#">{{ team.name }}</a></li>
   </ul>
+<!-- End Team Rankings section -->
 
+<!-- Team Section -->
+  <div class="team-container">
+  <div class="jumbotron text-center">
+    <h1>{{ main.teamObj.name }}</h1>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="row">
+        <div class="col-sm-12">
+          <h3>Team</h3>
+          <table class="table">
+            <tr>
+              <td>Name</td>
+              <td>Position</td>
+              <td>Picture</td>
+            </tr>
+          </table> 
+          <div style="height: 60vh; overflow: scroll;">
+            <table class="table table-striped">
+              <tr ng-repeat="teamMem in main.teamMembersArr">
+                <td><b>{{ teamMem.name }}</b></td>
+                <td><b>{{ teamMem.position }}</b></td>
+                <td><img ng-src="{{ teamMem.avatarUrl }}"></td>
+              </tr>
+          </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="row">
+        <div class="col-sm-12">
+          <h3>Logo</h3>
+            <img ng-src="{{ main.teamObj.logoUrl }}" class="thumbnail">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <h3>Current Ranking (placement out of {{ main.totalTeams }} teams)</h3>
+          <span><strong style="font-size: 50px">{{ main.teamRanking }}/{{ main.totalTeams }}</strong></span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <h3>Win - Lose</h3>
+          <span><strong style="font-size: 50px">{{ main.teamWins }} - {{ main.teamLoses }}</strong></span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <h3>Games and outcomes</h3>
+          <small>**Click of team name for game recap</small>
+          <table class="table table-striped">
+            <tr>
+              <td><b>Against</b></td>
+              <td><b>Final</b></td>
+            </tr>
+            <tr ng-repeat="game in main.allTeamMatches">
+              <td>{{ game.opposingTeam }}</td>
+              <td>{{ game.thisTeamsScore }} - {{ game.opposingTeamScore }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Team Section -->
 </div>
